@@ -17,9 +17,9 @@ var gnip = new Gnipper({
 gnip.search({
   publisher: 'twitter',
   query: 'gnip has:media',
-  fromDate: <YYYYMMDDhhmm>,    // optional
-  toDate: <YYYYMMDDhhmm>,      // optional
-  maxResults: <10..500>        // optional
+  fromDate: YYYYMMDDhhmm,    // optional
+  toDate: YYYYMMDDhhmm,      // optional
+  maxResults: 10..500        // optional
 }, function(error, data) {
   if (error) {
     ...
