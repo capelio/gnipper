@@ -21,12 +21,18 @@ var interceptTwitterSearchWithConfig = nock(API)
   .reply(200);
 
 test('Gnipper', function(t) {
-  t.plan(1);
+  t.plan(2);
 
   t.test('without constructor options', function(tt) {
     tt.plan(1);
 
-    tt.throws(function () { var x = new Gnipper(); }, 'throws an exception');
+    tt.throws(function () { var g = new Gnipper(); }, 'throws an exception');
+  });
+
+  t.test('without required options', function(tt) {
+    tt.plan(1);
+
+    tt.throws(function () { var g = new Gnipper({foo: 'bar'}); }, 'throws an exception');
   });
 });
 
