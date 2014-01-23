@@ -6,15 +6,12 @@ module.exports = Gnipper;
 function Gnipper (options) {
   if (!options) throw new Error('No options supplied to Gnipper constructor');
 
-  this.API_ROOT = 'https://' + options.username + ':' + options.password +
-    '@search.gnip.com/accounts/' + options.account;
-  this.SEARCH_ROOT = this.API_ROOT + '/search';
   this.options = options;
+  this.API = 'https://search.gnip.com/accounts/' + options.account;
 }
 
 Gnipper.prototype.searchUrl = function (options) {
-  var url = this.SEARCH_ROOT +
-    '/' + this.options.label + '.json?';
+  var url = this.API + '/search/' + this.options.label + '.json?';
 
   _.each(options, function (value, key) {
     url = url + key + '=' + value + '&';
@@ -26,8 +23,10 @@ Gnipper.prototype.searchUrl = function (options) {
 Gnipper.prototype.search = function (options, callback) {
   if (!options.publisher) return callback(new Error('publisher is a required param for Gnipper.search()'));
 
-  request.get(this.searchUrl(options), function (error, response) {
-    if (error) return callback(error);
-    callback(null, response);
+  request.get(this.searchUrl(options))
+    .auth(this.options.username, this.options.password)
+    .end(function (error, response) {
+      if (error) return callback(error);
+      callback(null, response);
   });
 };

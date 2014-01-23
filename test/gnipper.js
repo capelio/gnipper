@@ -9,7 +9,7 @@ var apiConfig = {
   label: 'prod'
 };
 
-var API = 'https://' + apiConfig.username + ':' + apiConfig.password + '@search.gnip.com';
+var API = 'https://search.gnip.com';
 var ACCOUNT = '/accounts/' + apiConfig.account;
 
 var interceptTwitterSearchWithDefaults = nock(API)
