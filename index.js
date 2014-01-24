@@ -5,19 +5,20 @@ module.exports = Gnipper;
 
 function Gnipper (options) {
   if (!options) throw new Error('No options supplied to Gnipper constructor');
-  if (!options.account || !options.username || !options.password || !options.label) {
-    throw new Error('Missing required option. Required: account, username, password, label');
+  if (!options.account || !options.username || !options.password) {
+    throw new Error('Missing required option. Required: account, username, password');
   }
 
   this.account = options.account;
   this.username = options.username;
   this.password = options.password;
-  this.label = options.label;
   this.API = 'https://search.gnip.com/accounts/' + options.account;
 }
 
 Gnipper.prototype.searchUrl = function (options) {
-  var url = this.API + '/search/' + this.label + '.json?';
+  var label = options.label || 'prod';
+  var url = this.API + '/search/' + label + '.json?';
+  delete options.label;
 
   _.each(options, function (value, key) {
     url = url + key + '=' + value + '&';

@@ -5,8 +5,7 @@ var test = require('tape'),
 var apiConfig = {
   account: 'ACME',
   username: 'wilycoyote',
-  password: 'supersecret',
-  label: 'prod'
+  password: 'supersecret'
 };
 
 var API = 'https://search.gnip.com';
@@ -64,6 +63,7 @@ test('Gnipper.search', function (t) {
     tt.plan(1);
 
     gnip.search({
+      label: 'prod',
       publisher: 'twitter',
       query: 'gnip',
       fromDate: '20130101000001',

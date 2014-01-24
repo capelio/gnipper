@@ -10,8 +10,7 @@ var Gnipper = require('gnipper');
 var gnip = new Gnipper({
   account: 'Account',
   username: 'Username',
-  password: 'Password',
-  label: 'Label'
+  password: 'Password'
 });
 
 gnip.search({
@@ -19,7 +18,8 @@ gnip.search({
   query: 'gnip has:media',
   fromDate: YYYYMMDDhhmm,    // optional
   toDate: YYYYMMDDhhmm,      // optional
-  maxResults: 10..500        // optional
+  maxResults: 10..500,       // optional
+  label: 'prod'              // optional, defaults to prod
 }, function(error, data) {
   if (error) {
     ...
