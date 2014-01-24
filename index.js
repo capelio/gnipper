@@ -32,8 +32,12 @@ Gnipper.prototype.search = function (options, callback) {
 
   request.get(this.searchUrl(options))
     .auth(this.username, this.password)
-    .end(function (error, response) {
-      if (error) return callback(error);
+    .end(function (response) {
+      if (response.error) {
+        // Include the error details returned by the Gnip API
+        var err = _.merge(response.error, response.body.error);
+        return callback(err);
+      }
       callback(null, response);
   });
 };
