@@ -21,9 +21,10 @@ Gnipper.prototype.searchUrl = function (options) {
   delete options.label;
 
   _.each(options, function (value, key) {
-    url = url + key + '=' + value + '&';
+    url = url + key + '=' + encodeURIComponent(value) + '&';
   });
 
+  // Drop the final & and return the URL
   return url.slice(0, -1);
 };
 
