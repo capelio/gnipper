@@ -1,6 +1,6 @@
 {
   "name": "gnipper",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Node.JS Gnip client",
   "main": "index.js",
   "scripts": {
