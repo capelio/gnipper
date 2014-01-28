@@ -31,12 +31,21 @@ Gnipper.prototype.searchUrl = function (options) {
 Gnipper.prototype.search = function (options, callback) {
   if (!options.publisher) return callback(new Error('publisher is a required param for Gnipper.search()'));
 
-  request.get(this.searchUrl(options))
+  var that = this;
+  var searchUrl = this.searchUrl(options);
+
+  request.get(searchUrl)
     .auth(this.username, this.password)
     .end(function (response) {
       if (response.error) {
         // Include the error details returned by the Gnip API
         var err = _.merge(response.error, response.body.error);
+        // Include Gnipper details with the error as well
+        err.gnipper = {
+          searchUrl: searchUrl,
+          username: that.username,
+          passwordIsDefined: (_.isUndefined(that.password)) ? false : true
+        };
         return callback(err);
       }
       callback(null, response);
