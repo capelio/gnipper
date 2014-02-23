@@ -13,8 +13,8 @@
   "keywords": [
     "Gnip"
   ],
-  "author": "C. Corey Capel",
-  "license": "MIT",
+  "author": "C. Corey Capel <corey@capelio.com> (http://www.capelio.com)",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/capelio/gnipper/issues"
   },
