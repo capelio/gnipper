@@ -46,7 +46,7 @@ Gnipper.prototype.search = function (options, callback) {
           username: that.username,
           passwordIsDefined: (_.isUndefined(that.password)) ? false : true
         };
-        return callback(err);
+        return callback(err, response);
       }
       callback(null, response);
   });
