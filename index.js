@@ -1,4 +1,4 @@
-var request = require('superagent'),
+var request = require('request'),
   _ = require('lodash');
 
 module.exports = Gnipper;
@@ -34,20 +34,28 @@ Gnipper.prototype.search = function (options, callback) {
   var that = this;
   var searchUrl = this.searchUrl(options);
 
-  request.get(searchUrl)
-    .auth(this.username, this.password)
-    .end(function (response) {
-      if (response.error) {
+  request
+    .get(searchUrl, {
+      'auth': {
+        'user': that.username,
+        'pass': that.password
+      }
+    }, function(err, res, body) {
+      if (err) {
         // Include the error details returned by the Gnip API
-        var err = _.merge(response.error, response.body.error);
+        var err = _.merge(err, res.error, res.body.error);
         // Include Gnipper details with the error as well
         err.gnipper = {
           searchUrl: searchUrl,
           username: that.username,
           passwordIsDefined: (_.isUndefined(that.password)) ? false : true
         };
-        return callback(err, response);
+        return callback(err, res);
+      } else {
+        try {
+          res.body = JSON.parse(body);
+        } catch(e) {}
+        callback(null, res)
       }
-      callback(null, response);
-  });
+    });
 };
