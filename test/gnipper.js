@@ -1,6 +1,6 @@
-var test = require('tape'),
-  nock = require('nock'),
-  Gnipper = require('../');
+var test = require('tape');
+var nock = require('nock');
+var Gnipper = require('../');
 
 var apiConfig = {
   account: 'ACME',
@@ -19,16 +19,16 @@ var interceptTwitterSearchWithConfig = nock(API)
   .get(ACCOUNT + '/search/prod.json?publisher=twitter&query=gnip&fromDate=20130101000001&toDate=20130201115959&maxResults=50')
   .reply(200);
 
-test('Gnipper', function(t) {
+test('Gnipper', function (t) {
   t.plan(2);
 
-  t.test('without constructor options', function(tt) {
+  t.test('without constructor options', function (tt) {
     tt.plan(1);
 
     tt.throws(function () { var g = new Gnipper(); }, 'throws an exception');
   });
 
-  t.test('without required options', function(tt) {
+  t.test('without required options', function (tt) {
     tt.plan(1);
 
     tt.throws(function () { var g = new Gnipper({foo: 'bar'}); }, 'throws an exception');
@@ -40,10 +40,10 @@ test('Gnipper.search', function (t) {
 
   var gnip = new Gnipper(apiConfig);
 
-  t.test('without options', function(tt) {
+  t.test('without options', function (tt) {
     tt.plan(1);
 
-    gnip.search({}, function(error, response) {
+    gnip.search({}, function (error, response) {
       tt.ok(error instanceof Error, 'returns an error');
     });
   });
@@ -54,12 +54,12 @@ test('Gnipper.search', function (t) {
     gnip.search({
       publisher: 'twitter',
       query: 'gnip'
-    }, function(error, response) {
+    }, function (error, response) {
       tt.equal(response.statusCode, 200, 'returns 200');
     });
   });
 
-  t.test('with all options', function(tt) {
+  t.test('with all options', function (tt) {
     tt.plan(1);
 
     gnip.search({
@@ -69,7 +69,7 @@ test('Gnipper.search', function (t) {
       fromDate: '20130101000001',
       toDate: '20130201115959',
       maxResults: 50
-    }, function(error, response) {
+    }, function (error, response) {
       tt.equal(response.statusCode, 200, 'returns 200');
     });
   });
