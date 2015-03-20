@@ -21,14 +21,14 @@
   "homepage": "https://github.com/capelio/gnipper",
   "devDependencies": {
     "faucet": "0.0.1",
-    "tape": "^2.3.2"
+    "nock": "^1.2.0",
+    "tape": "^3.5.0"
   },
   "dependencies": {
-    "lodash": "^2.4.1",
-    "nock": "^0.27.2",
-    "superagent": "^0.16.0"
+    "lodash": "^3.5.0",
+    "superagent": "^1.1.0"
   },
   "engines": {
-    "node": "~0.10.24"
+    "node": "0.10.x"
   }
 }
